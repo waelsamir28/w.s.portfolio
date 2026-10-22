@@ -1,12 +1,10 @@
-import { mkdir, writeFile } from "fs/promises";
-import path from "path";
+import { put } from "@vercel/blob";
 import { randomBytes } from "crypto";
 import { requireAdmin, logActivity } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
-const UPLOAD_DIR = path.join(process.cwd(), "data", "uploads");
-const MAX_SIZE = 8 * 1024 * 1024; // 8MB
+const MAX_SIZE = 10 * 1024 * 1024; // 10MB
 
 const IMAGE_TYPES: Record<string, string> = {
   "image/jpeg": "jpg",
@@ -53,7 +51,7 @@ export async function POST(req: Request) {
       }, { status: 400 });
     }
     if (file.size > MAX_SIZE) {
-      return Response.json({ error: "حجم الملف يتجاوز 8MB." }, { status: 400 });
+      return Response.json({ error: "حجم الملف يتجاوز 10MB." }, { status: 400 });
     }
 
     const bytes = Buffer.from(await file.arrayBuffer());
@@ -66,12 +64,15 @@ export async function POST(req: Request) {
       }
     }
 
-    const safeName = `u-${Date.now().toString(36)}-${randomBytes(5).toString("hex")}.${ext}`;
-    await mkdir(UPLOAD_DIR, { recursive: true });
-    await writeFile(path.join(UPLOAD_DIR, safeName), bytes);
+    const safeName = `uploads/u-${Date.now().toString(36)}-${randomBytes(5).toString("hex")}.${ext}`;
+    const blob = await put(safeName, bytes, {
+      access: "public",
+      contentType: file.type,
+      addRandomSuffix: false,
+    });
 
-    await logActivity(auth.id, "رفع ملف", safeName);
-    return Response.json({ url: `/api/files/${safeName}`, name: safeName, size: bytes.length });
+    await logActivity(auth.id, "رفع ملف إلى Blob", blob.pathname);
+    return Response.json({ url: blob.url, name: blob.pathname, size: bytes.length });
   } catch (err) {
     console.error("[upload]", err);
     return Response.json({ error: "فشل رفع الملف." }, { status: 500 });
