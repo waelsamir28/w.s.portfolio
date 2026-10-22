@@ -51,7 +51,7 @@ export async function POST(req: Request) {
       }, { status: 400 });
     }
     if (file.size > MAX_SIZE) {
-      return Response.json({ error: "حجم الملف يتجاوز 8MB." }, { status: 400 });
+      return Response.json({ error: "حجم الملف يتجاوز 10MB." }, { status: 400 });
     }
 
     const bytes = Buffer.from(await file.arrayBuffer());

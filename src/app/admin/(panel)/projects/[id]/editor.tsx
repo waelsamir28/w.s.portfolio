@@ -353,7 +353,7 @@ export function ProjectEditor({ projectId }: { projectId: string }) {
                     </div>
                   )}
                   <div className="flex flex-col gap-2">
-                    <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={(e) => e.target.files?.[0] && uploadCover(e.target.files[0])} />
+                    <input ref={fileRef} type="file" accept="image/jpeg,image/png,image/webp,image/svg+xml" className="hidden" onChange={(e) => e.target.files?.[0] && uploadCover(e.target.files[0])} />
                     <button type="button" className="admin-btn-outline !py-1.5 !text-xs" onClick={() => fileRef.current?.click()} disabled={Boolean(uploading)}>
                       {uploading === "الغلاف" ? "جارٍ الرفع…" : "رفع صورة الغلاف"}
                     </button>
@@ -364,12 +364,12 @@ export function ProjectEditor({ projectId }: { projectId: string }) {
                     )}
                   </div>
                 </div>
-                <p className="text-[11px] text-white/30 mt-2">JPG / PNG / WebP / SVG — حتى 8MB</p>
+                <p className="text-[11px] text-white/30 mt-2">JPG / PNG / WebP / SVG — حتى 10MB</p>
               </div>
 
               <div>
                 <p className="text-xs font-bold text-white/55 mb-2">معرض صور المشروع</p>
-                <input ref={galleryRef} type="file" accept="image/*" multiple className="hidden" onChange={(e) => void uploadGallery(e.target.files)} />
+                <input ref={galleryRef} type="file" accept="image/jpeg,image/png,image/webp,image/svg+xml" multiple className="hidden" onChange={(e) => void uploadGallery(e.target.files)} />
                 <button type="button" className="admin-btn-outline !py-1.5 !text-xs" onClick={() => galleryRef.current?.click()} disabled={Boolean(uploading)}>
                   {uploading === "المعرض" ? "جارٍ الرفع…" : "+ رفع صور (متعددة)"}
                 </button>
