@@ -57,6 +57,12 @@ export async function POST(req: Request) {
     const bytes = Buffer.from(await file.arrayBuffer());
     if (bytes.length === 0) return Response.json({ error: "الملف فارغ." }, { status: 400 });
 
+    if (asImage && file.type.startsWith("image/") && !file.type.includes("svg")) {
+      const signature = bytes.subarray(0, 12).toString("hex");
+      const validRaster = ["ffd8ffe0", "ffd8ffe1", "ffd8ffe2", "89504e47", "52494646"].some((prefix) => signature.startsWith(prefix));
+      if (!validRaster) return Response.json({ error: "محتوى الصورة غير صالح." }, { status: 400 });
+    }
+
     if (ext === "svg") {
       const text = bytes.toString("utf8");
       if (text.length > 300_000 || !svgSafe(text)) {

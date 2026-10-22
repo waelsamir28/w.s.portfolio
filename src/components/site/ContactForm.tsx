@@ -3,7 +3,7 @@
 import { useRef, useState, type FormEvent } from "react";
 import { IconCheck, IconWhatsApp } from "./icons";
 
-const MAX_FILE = 4 * 1024 * 1024;
+const MAX_FILE = 10 * 1024 * 1024;
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "application/pdf"];
 
 export default function ContactForm({
@@ -33,7 +33,7 @@ export default function ContactForm({
     if (!form) return;
 
     if (file && file.size > MAX_FILE) {
-      setFileError("حجم الملف يتجاوز 4MB.");
+      setFileError("حجم الملف يتجاوز 10MB.");
       setFile(null);
       return;
     }
@@ -82,7 +82,7 @@ export default function ContactForm({
   }
 
   return (
-    <form ref={formRef} onSubmit={onSubmit} className="card p-6 md:p-8 space-y-5" noValidate>
+    <form ref={formRef} onSubmit={onSubmit} className="card p-5 sm:p-6 md:p-8 flex flex-col gap-5" noValidate>
       {/* Honeypot خفي */}
       <div className="hidden" aria-hidden="true">
         <label>
@@ -145,7 +145,7 @@ export default function ContactForm({
       </div>
 
       <div>
-        <label className="lbl" htmlFor="cf-file">مرفق مرجعي (اختياري — صورة أو PDF حتى 4MB)</label>
+        <label className="lbl" htmlFor="cf-file">مرفق مرجعي (اختياري — صورة أو PDF حتى 10MB)</label>
         <input
           id="cf-file"
           type="file"

@@ -32,10 +32,6 @@ export default function Navbar({
   }, []);
 
   useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
-
-  useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
@@ -133,6 +129,7 @@ export default function Navbar({
             <Link
               key={l.href}
               href={l.href}
+              onClick={() => setOpen(false)}
               className="py-3 text-2xl font-extrabold transition-all"
               style={{
                 color: pathname === l.href ? "var(--primary)" : "var(--text)",
