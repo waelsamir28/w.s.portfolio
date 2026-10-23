@@ -105,6 +105,8 @@ export function ProjectEditor({ projectId }: { projectId: string }) {
   }, [projectId, isNew]);
 
   useEffect(() => {
+    // Data loading intentionally updates the form after the request resolves.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     void load();
   }, [load]);
 
@@ -222,7 +224,7 @@ export function ProjectEditor({ projectId }: { projectId: string }) {
     <div className="space-y-5 max-w-5xl">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-xl font-extrabold text-white/90">{isNew ? "مشروع جديد" : "تعديل المشروع"}</h1>
+          <h1 className="text-xl font-extrabold text-white/90">{isNew ? "مشروع جديد" : "ت��ديل المشروع"}</h1>
           {!isNew && form.slug && (
             <p className="text-[11px] text-white/35 font-en mt-1" dir="ltr" style={{ textAlign: "end" }}>
               /projects/{form.slug}

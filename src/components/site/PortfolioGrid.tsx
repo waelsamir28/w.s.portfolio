@@ -43,7 +43,7 @@ export default function PortfolioGrid({
   return (
     <div>
       {/* الفلاتر */}
-      <div className="flex flex-col lg:flex-row gap-4 lg:items-center justify-between mb-8">
+      <div className="flex flex-col lg:flex-row gap-4 lg:items-center justify-between mb-8" role="search">
         <div className="flex flex-wrap gap-2" role="tablist" aria-label="تصنيفات الأعمال">
           <button
             onClick={() => { setActiveCat("all"); setVisible(PAGE_SIZE); }}

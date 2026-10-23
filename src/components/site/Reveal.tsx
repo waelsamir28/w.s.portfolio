@@ -14,17 +14,14 @@ export default function Reveal({
   animate?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [shown, setShown] = useState(false);
+  const [shown, setShown] = useState(!animate);
 
   useEffect(() => {
-    if (!animate) {
-      setShown(true);
-      return;
-    }
+    if (!animate) return;
     const el = ref.current;
     if (!el) return;
     if (typeof IntersectionObserver === "undefined") {
-      setShown(true);
+      queueMicrotask(() => setShown(true));
       return;
     }
     const io = new IntersectionObserver(
