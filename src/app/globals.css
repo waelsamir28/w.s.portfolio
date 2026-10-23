@@ -31,9 +31,39 @@ html[data-shadow="soft"] { --card-shadow: 0 12px 34px -14px rgb(0 0 0 / 0.45); }
 html[data-shadow="strong"] { --card-shadow: 0 26px 70px -22px rgb(0 0 0 / 0.55); }
 
 html[data-theme="dark"] { color-scheme: dark; }
-html[data-theme="light"] { color-scheme: light; }
+html[data-theme="light"] {
+  color-scheme: light;
+  --bg: var(--c-bg, #f7f4ee);
+  --surface: var(--c-surface, #ffffff);
+  --surface-2: color-mix(in srgb, var(--surface) 92%, var(--c-bg, #f7f4ee));
+  --text: var(--c-text, #171717);
+  --muted: var(--c-muted, #706b63);
+  --border: color-mix(in srgb, var(--text) 12%, transparent);
+  --card-shadow: 0 14px 40px -22px rgb(35 28 18 / 0.24);
+}
 
 html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-padding-top: 5rem; }
+  a, button, input, textarea, select { transition-timing-function: cubic-bezier(.22, 1, .36, 1); }
+}
+
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+
+.site-grid {
+  background-image: linear-gradient(color-mix(in srgb, var(--text) 4%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--text) 4%, transparent) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(to bottom, black, transparent 70%);
+}
+
+.glow-orb { position: absolute; width: 22rem; height: 22rem; border-radius: 999px; background: color-mix(in srgb, var(--primary) 14%, transparent); filter: blur(70px); pointer-events: none; }
+
+@media (max-width: 640px) {
+  .container-x { padding-inline: 1rem; }
+  .section-pad { padding-block: 3.5rem; }
+  .btn { padding: .72rem 1.15rem; }
+}
 
 body {
   background: var(--bg);
@@ -189,13 +219,24 @@ html[data-anim="off"] .anim-rise, html[data-anim="off"] .anim-fade, html[data-an
   border: 3px solid var(--bg);
 }
 
-/* ============ لوحة الإدارة (ثيم ثابت داكن) ============ */
+/* ============ لوحة الإدارة ============ */
 
 .admin-shell {
-  background: #0b0b0e;
-  color: #e9e6df;
+  --admin-bg: #0b0b0e;
+  --admin-surface: #131318;
+  --admin-surface-2: #0e0e12;
+  --admin-text: #e9e6df;
+  --admin-muted: rgba(233,230,223,.52);
+  --admin-border: rgba(255,255,255,.08);
+  background: radial-gradient(circle at 82% 0%, rgba(198,161,91,.08), transparent 28rem), var(--admin-bg);
+  color: var(--admin-text);
   font-family: var(--font-cairo), system-ui, sans-serif;
 }
+.admin-shell::selection { background: rgba(198,161,91,.3); }
+.admin-shell main { animation: riseIn .55s cubic-bezier(.22, 1, .36, 1) both; }
+.admin-shell h1, .admin-shell h2 { letter-spacing: -.02em; }
+.admin-sidebar-link:hover { color: #e9d39f !important; background: rgba(198,161,91,.07) !important; transform: translateX(-3px); }
+.admin-sidebar-link { transition: color .2s ease, background .2s ease, transform .2s ease; }
 .admin-card {
   background: #131318;
   border: 1px solid rgba(255, 255, 255, 0.07);
