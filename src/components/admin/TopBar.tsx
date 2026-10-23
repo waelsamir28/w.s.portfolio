@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { api } from "./ui";
+import ThemeToggle from "@/components/site/ThemeToggle";
 
 export default function TopBar({ username }: { username: string }) {
   const router = useRouter();
@@ -31,6 +32,7 @@ export default function TopBar({ username }: { username: string }) {
         </div>
       </div>
       <div className="flex items-center gap-2">
+        <ThemeToggle compact />
         <Link href="/" target="_blank" className="admin-btn-outline !py-2 !px-3.5 !text-xs">
           عرض الموقع ↗
         </Link>
