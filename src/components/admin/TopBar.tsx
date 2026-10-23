@@ -18,7 +18,7 @@ export default function TopBar({ username }: { username: string }) {
   }
 
   return (
-    <div className="flex items-center justify-between gap-3 px-4 md:px-6 py-3 border-b border-white/[0.06]">
+    <div className="flex flex-wrap items-center justify-between gap-3 px-4 md:px-6 py-3 border-b border-white/[0.06]">
       <div className="flex items-center gap-3 min-w-0">
         <span
           className="grid place-items-center w-9 h-9 font-en text-xs font-bold shrink-0"

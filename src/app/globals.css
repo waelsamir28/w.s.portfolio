@@ -70,6 +70,14 @@ body {
   color: var(--text);
   font-family: var(--site-font-ar), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  transition: background-color .35s ease, color .35s ease;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) { animation-duration: .3s; }
+
+@media (prefers-reduced-motion: reduce) {
+  body { transition: none; }
 }
 
 .font-en { font-family: var(--site-font-en), var(--site-font-ar), sans-serif; }

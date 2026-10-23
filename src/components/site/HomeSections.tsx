@@ -56,7 +56,7 @@ export function ProjectCard({ p, animate, big = false }: { p: PublicProject; ani
         href={`/projects/${p.slug}`}
         className="group/card card card-hover overflow-hidden block"
       >
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-hidden bg-[var(--surface-2)]">
           {p.coverImage ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
