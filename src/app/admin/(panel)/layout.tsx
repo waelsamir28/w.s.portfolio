@@ -11,7 +11,7 @@ export default async function AdminPanelLayout({ children }: { children: ReactNo
   if (!admin) redirect("/admin/login");
 
   return (
-    <div className="admin-shell min-h-screen" dir="rtl" style={{ background: "#0b0b0e" }}>
+    <div className="admin-shell min-h-screen" dir="rtl">
       <div className="flex min-h-screen">
         <aside
           className="w-60 shrink-0 border-l border-white/[0.06] sticky top-0 h-screen hidden md:flex flex-col"
