@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { IconClose, IconSpark } from "./icons";
+import ThemeToggle from "./ThemeToggle";
 
 const LINKS = [
   { href: "/", label: "الرئيسية" },
@@ -94,7 +95,8 @@ export default function Navbar({
             })}
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
+            <ThemeToggle compact />
             <Link href="/contact" className="btn btn-primary btn-sm hidden sm:inline-flex">
               <IconSpark className="w-4 h-4" />
               {ctaLabel}
